@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EphecWebProject.Models.DataModel.SousCategorie>
+
+@{ 
+    int sessionCategorie;
+    if (Session["CATEGORIE"] == null)
+    {
+        sessionCategorie = 0;
+    }
+    else
+    {
+        sessionCategorie = (int)Session["CATEGORIE"];
+    }
+    int idSousCategorie = 0;
+    if(Session["SOUS-CATEGORIE"] != null)
+    {
+        idSousCategorie = (int)Session["SOUS-CATEGORIE"];
+    }
+}
+
+<label for="selectSousCategorie" class="control-label">Sous categorie:</label>
+<select name="selectSousCategorie" id="selectSousCategorie" class="form-control">
+    <option value="0">--tous--</option>
+
+    @foreach (var item in Model)
+    {
+        if (item.SCAT_Id == idSousCategorie)
+        {
+            <option selected value="@item.SCAT_Id">
+                @Html.DisplayFor(modelItem => item.SCAT_Libelle)
+            </option>
+        }
+        else
+        {
+            <option value="@item.SCAT_Id">
+                @Html.DisplayFor(modelItem => item.SCAT_Libelle)
+            </option>
+        }
+
+    }
+
+</select>
+
+<script>
+    $(document).ready(function () {
+
+     $("#selectSousCategorie").on("change", function (e) {
+            var idSelectSousCategorie = e.target.value;
+            $.ajax({
+                url: "@Url.Action("ListeArticle", "Article")",
+                data: { idCategorie: @sessionCategorie, idSousCategorie: idSelectSousCategorie },
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#articlesParCategorie").html(data);
+                }
+            });
+        });
+
+    });
+</script>
+

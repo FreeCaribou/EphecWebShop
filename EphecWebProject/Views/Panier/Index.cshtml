@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Panier";
+}
+
+<h2>Votre Panier:</h2>
+
+<div id="listePanier">
+    @{
+        Html.RenderAction("ListePanier", "Panier");
+    }
+</div>
+
+<button type="button" title="Commander">@Html.ActionLink("Commander", "CommanderPanier", "Panier")</button>
+
+

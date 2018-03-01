@@ -1,0 +1,75 @@
+﻿@model EphecWebProject.Models.DataModel.Commande
+
+@{
+    ViewBag.Title = "Detail de la commande";
+}
+
+<h2>Detail de la commande</h2>
+
+<div id="listeArticleCommande">
+    @{
+        Html.RenderAction("ListeArticleCommande", "Commande", new { idCommande = Model.COM_Id });
+    }
+</div>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.COM_Statut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COM_Statut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COM_DateLivraison)
+        </dt>
+
+        <dd>
+            @Model.COM_DateLivraison.ToString("dd/MM/yyyy")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COM_Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COM_Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COM_Prenom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COM_Prenom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COM_Adresse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COM_Adresse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COM_CodePostal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COM_CodePostal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COM_Ville)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COM_Ville)
+        </dd>
+
+    </dl>
+</div>

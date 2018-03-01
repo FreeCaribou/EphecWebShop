@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Commander Panier";
+}
+
+<h2>Commandez votre panier</h2>
+
+<div id="listePanierACommander">
+    @{
+        Html.RenderAction("ListePanierCommande", "Commande");
+    }
+</div>
+
+<div id="detailLivraison">
+    @{
+        Html.RenderAction("DetailLivraisonCommande", "Commande");
+    }
+</div>
+

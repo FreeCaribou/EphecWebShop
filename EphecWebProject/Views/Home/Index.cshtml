@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Bienvenue";
+    int sessionCategorie;
+    int sessionSousCategorie;
+    if (Session["CATEGORIE"] == null)
+    {
+        sessionCategorie = 0;
+    }
+    else
+    {
+        sessionCategorie = (int) Session["CATEGORIE"];
+    }
+    if (Session["SOUS-CATEGORIE"] == null)
+    {
+        sessionSousCategorie = 0;
+    }
+    else
+    {
+        sessionSousCategorie = (int)Session["SOUS-CATEGORIE"];
+    }
+}
+
+<h2>Bienvenue dans l'EPHEC Web Shop</h2>
+
+<div id="listeCategorie">
+    @{
+        Html.RenderAction("ListeCategorie", "Categorie", new { });
+    }
+</div>
+
+<div id="listeSousCategorie">
+    @{
+        Html.RenderAction("ListeSousCategorie", "SousCategorie", new { idCategorie = sessionCategorie });
+    }
+</div>
+
+
+<div id="articlesParCategorie">
+    @{
+        Html.RenderAction("ListeArticle", "Article", new { idCategorie = sessionCategorie, idSousCategorie = sessionSousCategorie });
+    }
+</div>

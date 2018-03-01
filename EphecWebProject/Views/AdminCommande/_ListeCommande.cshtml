@@ -1,0 +1,93 @@
+﻿@model IEnumerable<EphecWebProject.Models.DataModel.Commande>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.CLI_Nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COM_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COM_Statut)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.CLI_Nom) @Html.DisplayFor(modelItem => item.Client.CLI_Prenom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COM_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COM_Statut)
+            </td>
+
+            <td>
+                <button>@Html.ActionLink("Voir détail de la commande", "DetailCommande", "Commande", new { idCommande = item.COM_Id }, new { })</button>
+                <button type="button" data-toggle="modal" data-target="#modifierStatutModal" data-idcommande="@item.COM_Id">
+                    Modifier le statut                  
+                </button>
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="modal" id="modifierStatutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <select name="COM_Statut" id="COM_Statut">
+                    <option value="En attente">En attente</option>
+                    <option value="Livraison en cours">Livraison en cours</option>
+                    <option value="Livraison terminée">Livraison terminée</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" value="" id="confirmerChangerStatut" class="btn btn-default" data-dismiss="modal">Changer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $('#modifierStatutModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var idCommande = button.data('idcommande');
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            var modal = $(this);
+            modal.find('.modal-title').text('Modifier le statut de la commande numéro ' + idCommande);
+            modal.find('#confirmerChangerStatut').val(idCommande);
+        });
+
+        $("#confirmerChangerStatut").on("click", function (e) {
+            var idCommandeAChanger = e.target.value;
+            var textCommandeAChanger = $('#COM_Statut option:selected').val();
+
+            $.ajax({
+                url: "@Url.Action("EditStatut", "AdminCommande")",
+                data: { idCommande: idCommandeAChanger, statutCommande: textCommandeAChanger },
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#adminListeCommande").html(data);
+                }
+            });
+
+        });
+
+    });
+</script>

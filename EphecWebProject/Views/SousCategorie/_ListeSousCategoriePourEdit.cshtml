@@ -1,0 +1,17 @@
+﻿@model IEnumerable<EphecWebProject.Models.DataModel.SousCategorie>
+
+<div class="form-group">
+    <label for="ART_SCAT_Id" class="control-label col-md-2">Sous categorie:</label>
+    <div class="col-md-10">
+        <select name="ART_SCAT_Id" id="ART_SCAT_Id" class="form-control">
+
+            @foreach (var item in Model)
+            {
+                <option value="@item.SCAT_Id">
+                    @Html.DisplayFor(modelItem => item.SCAT_Libelle)
+                </option>
+            }
+
+        </select>
+    </div>
+</div>

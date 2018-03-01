@@ -1,0 +1,58 @@
+﻿@model IEnumerable<EphecWebProject.Models.DataModel.Categorie>
+
+@{ 
+    int idCategorieSession = 0;
+    if(Session["CATEGORIE"] != null)
+    {
+        idCategorieSession = (int) Session["CATEGORIE"];
+    }
+}
+
+<label for="selectCategorie" class="control-label">Categorie:</label>
+<select name="selectCategorie" id="selectCategorie" class="form-control">
+    <option value="0">--tous--</option>
+
+@foreach (var item in Model)
+{
+    if (item.CAT_Id == idCategorieSession)
+    {
+        <option selected value="@item.CAT_Id">@Html.DisplayFor(modelItem => item.CAT_Libelle)</option>
+    }
+    else
+    {
+        <option value="@item.CAT_Id">@Html.DisplayFor(modelItem => item.CAT_Libelle)</option>
+    }
+}
+
+</select>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#selectCategorie").on("change", function (e) {
+            var idSelectCategorie = e.target.value;
+            $.ajax({
+                url: "@Url.Action("ListeArticle", "Article")",
+                data: { idCategorie: idSelectCategorie, idSousCategorie: 0 },
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#articlesParCategorie").html(data);
+                }
+            });
+
+            $.ajax({
+                url: "@Url.Action("ListeSousCategorie", "SousCategorie")",
+                data: { idCategorie: idSelectCategorie },
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#listeSousCategorie").html(data);
+                }
+            });
+        });
+
+    });
+</script>
+

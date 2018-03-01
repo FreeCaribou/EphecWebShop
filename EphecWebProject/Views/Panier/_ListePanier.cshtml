@@ -1,0 +1,89 @@
+﻿@model IEnumerable<EphecWebProject.Models.ArticlePanier>
+@{ 
+    decimal prixTotalPanier = 0;
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LibelleArticle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantiteArticle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrixUnitaire)
+        </th>
+        <th>
+            Prix total
+        </th>
+
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        @{
+            decimal prixTotalArticle = item.QuantiteArticle * item.PrixUnitaire;
+            prixTotalPanier += prixTotalArticle;
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.LibelleArticle)
+        </td>
+        <td>
+            <button type="button" title="Diminuer" id="buttonDiminuerArticle" value="@item.IdArticle">-</button>
+            @Html.DisplayFor(modelItem => item.QuantiteArticle)
+            <button type="button" title="Augmenter" id="buttonAugmenterArticle" value="@item.IdArticle">+</button>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrixUnitaire) euros
+        </td>
+        <td>
+            @prixTotalArticle euros
+        </td>
+
+    </tr>
+}
+
+</table>
+
+<h3>Prix Total du panier:</h3>
+<p>@prixTotalPanier euros</p>
+
+<script>
+    $(document).ready(function () {
+
+        $('button[id="buttonDiminuerArticle"]').each(function (index, element) {
+            $(this).on("click", function (e) {
+                var idArticleADiminuer = e.target.value;
+                $.ajax({
+                    url: "@Url.Action("DiminuerArticlePanier", "Panier")",
+                    data: { idArticle: idArticleADiminuer },
+                    type: "POST",
+                    dataType: "html",
+                    success: function (data) {
+                        $("#listePanier").html(data);
+                    }
+                });
+            });
+        });
+
+         $('button[id="buttonAugmenterArticle"]').each(function (index, element) {
+            $(this).on("click", function (e) {
+                var idArticleAAugmenter = e.target.value;
+                $.ajax({
+                    url: "@Url.Action("AugmenterArticlePanier", "Panier")",
+                    data: { idArticle: idArticleAAugmenter },
+                    type: "POST",
+                    dataType: "html",
+                    success: function (data) {
+                        $("#listePanier").html(data);
+                    }
+                });
+            });
+        });
+
+
+
+    });
+</script>

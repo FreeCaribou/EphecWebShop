@@ -1,0 +1,52 @@
+﻿@model EphecWebProject.Models.DataModel.Article
+
+@{
+    ViewBag.Title = "Détail de l'article";
+}
+
+<h2>@Html.DisplayFor(model => model.ART_Libelle)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ART_Description)
+        </dd>
+
+        <dt>
+            Prix
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ART_Prix)
+        </dd>
+
+        <dt>
+            Stock disponible
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ART_Stock)
+        </dd>
+
+        @if (Model.ART_UrlImage != null) {
+            <dt>
+                Photo de l'article
+            </dt>
+            <dd>
+                <img src="@Model.ART_UrlImage" alt="@Model.ART_Libelle" height="150" width="150"/>
+            </dd>
+        }
+
+    </dl>
+
+    <button title="Ajouter au panier" type="button">@Html.ActionLink("Ajouter au panier", "AjoutArticlePanier", "Panier", new { idArticle = Model.ART_Id }, new { })</button>
+</div>
+<p>
+    @Html.ActionLink("Retour à la liste", "Index", "Home")
+</p>

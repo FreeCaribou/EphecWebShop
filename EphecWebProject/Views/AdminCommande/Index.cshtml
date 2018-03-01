@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Admin Commande";
+}
+
+<h2>Liste des commandes de vos clients</h2>
+
+<div id="adminListeCommande">
+    @{
+        Html.RenderAction("ListeCommande", "AdminCommande");
+    }
+</div>
+

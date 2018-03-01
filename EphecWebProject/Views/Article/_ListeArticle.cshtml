@@ -1,0 +1,36 @@
+﻿@model IEnumerable<EphecWebProject.Models.DataModel.Article>
+
+<div class="row">
+@foreach (var item in Model)
+{
+    <div class="col-md-4">
+        <h3>
+            @Html.DisplayFor(modelItem => item.ART_Libelle)
+        </h3>
+        <p>
+            @Html.DisplayFor(modelItem => item.ART_Prix) euro
+        </p>
+        <p>
+            @Html.DisplayFor(modelItem => item.ART_Stock) disponible
+        </p>
+        <p>
+            @item.SousCategorie.SCAT_Libelle
+        </p>
+        <p>
+            @if (item.ART_UrlImage != null)
+            {
+                <img src="@item.ART_UrlImage" alt="@item.ART_Libelle" height="100" width="100" />
+            }
+            else
+            {
+                <img src="~/Images/logo-ephec.png" alt="@item.ART_Libelle" height="100" width="100" />
+            }
+        </p>
+
+        <p>
+            @Html.ActionLink("Voir l'article", "DetailArticle", "Article", new { idArticle = @item.ART_Id }, new { })
+        </p>
+    </div>
+}
+
+</div>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<EphecWebProject.Models.DataModel.Client>
+
+@{
+    ViewBag.Title = "Data Table Client";
+}
+
+<h2>Data Table des clients</h2>
+
+
+<table class="table" id="dataTableClient">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CLI_Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CLI_Prenom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CLI_Civilite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CLI_Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CLI_Adresse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CLI_CodePostal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CLI_Ville)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CLI_Telephone)
+            </th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLI_Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLI_Prenom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLI_Civilite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLI_Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLI_Adresse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLI_CodePostal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLI_Ville)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLI_Telephone)
+        </td>
+    </tr>
+}
+
+</table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datatables")
+    <script>
+        $(document).ready(function () {
+            $('#dataTableClient').dataTable()
+        });
+    </script>
+}

@@ -1,0 +1,64 @@
+﻿@model EphecWebProject.Models.DataModel.Article
+
+@{
+    ViewBag.Title = "Suppression";
+}
+
+<h2>Suppression</h2>
+
+<h3>Êtes vous sur de vouloir supprimer cet article?</h3>
+<div>
+    <h4>Article:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SousCategorie.SCAT_Libelle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SousCategorie.SCAT_Libelle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ART_Libelle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ART_Libelle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ART_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ART_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ART_Prix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ART_Prix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ART_Stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ART_Stock)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour à la liste", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<EphecWebProject.Models.DataModel.Commande>
+
+@{
+    ViewBag.Title = "Mes commandes";
+}
+
+<h2>Mes commandes</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COM_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COM_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COM_Statut)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.COM_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COM_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COM_Statut)
+        </td>
+        <td>
+            @Html.ActionLink("Détail de la commande", "DetailCommande", "Commande", new { idCommande = @item.COM_Id }, new { })
+        </td>
+    </tr>
+}
+
+</table>

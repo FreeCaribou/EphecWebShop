@@ -1,0 +1,87 @@
+﻿@model EphecWebProject.Models.FormModel.FormModelLivraisonCommande
+@using EphecWebProject.Models.DataModel
+@{ 
+    Client client = (Client)Session["CLIENT"];
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Détail de la livraison pour la commande</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @Value = client.CLI_Nom } })
+                @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prenom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Prenom, new { htmlAttributes = new { @class = "form-control", @Value = client.CLI_Prenom } })
+                @Html.ValidationMessageFor(model => model.Prenom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Civilite, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="Civilite" id="Civilite">
+                    <option value="Monsieur">Monsieur</option>
+                    <option value="Madame">Madame</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @Value = client.CLI_Adresse} })
+                @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CodePostal, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CodePostal, new { htmlAttributes = new { @class = "form-control", @Value = client.CLI_CodePostal } })
+                @Html.ValidationMessageFor(model => model.CodePostal, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ville, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ville, new { htmlAttributes = new { @class = "form-control", @Value = client.CLI_Ville } })
+                @Html.ValidationMessageFor(model => model.Ville, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateLivraison, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateLivraison, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateLivraison, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $("#DateLivraison").datepicker({ dateFormat: 'dd-mm-yy' });
+            });
+        </script>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

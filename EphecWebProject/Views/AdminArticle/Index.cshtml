@@ -1,0 +1,50 @@
+﻿@model IEnumerable<EphecWebProject.Models.DataModel.Article>
+
+@{
+    ViewBag.Title = "Liste articles";
+}
+
+<h2>Liste des articles:</h2>
+
+<p>
+    @Html.ActionLink("Créer un nouveau article", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ART_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ART_Libelle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ART_Prix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ART_Stock)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ART_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ART_Libelle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ART_Prix)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ART_Stock)
+        </td>
+        <td>
+            @Html.ActionLink("Détail éditable de l'article", "Edit", new { id=item.ART_Id }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.ART_Id })
+        </td>
+    </tr>
+}
+
+</table>
